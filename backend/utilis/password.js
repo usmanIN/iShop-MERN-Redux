@@ -4,14 +4,15 @@ const SALT_ROUNDS = 10;
 
 exports.encryptPassword = (password) => {
     
-    bcrypt.hash(password,SALT_ROUNDS).then(function(converted){
+    bcrypt.hash(password,SALT_ROUNDS).then(function(converted){      
         return converted;
     }); 
 }
 
-exports.decryptedPassword = async (textpassword,hashpassword) => {
+exports.decryptedPassword = (textpassword,hashpassword) => {
   
-    const success =  await bcrypt.compare(textpassword,hashpassword);
- 
-    return success;
+    bcrypt.compare(textpassword,hashpassword).then(function(response){
+        return response;
+    });
+
 }
